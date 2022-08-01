@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'react-lottie-player'
 
-export const Animicon = ({icon, click, enter, autoplay, reSetAutoplay}) => {
+export const Animicon = ({icon, click, enter, autoplay, reSetAutoplay, canvas, forceLoop}) => {
 
     const animationData = require(`./icons/${icon}.json`)
 
@@ -41,12 +41,12 @@ export const Animicon = ({icon, click, enter, autoplay, reSetAutoplay}) => {
           onLoopComplete={() => handleLoopComplete()}
 
           goTo={loop ? 1 : 0}
-          play={play && loop }
-          loop={loop || hover}
+          play={(play && loop) || forceLoop }
+          loop={loop || hover || forceLoop}
           //direction={hover ? 1 : -1}
-          renderer={"svg"}
+          renderer={canvas ? "canvas" : "svg"}
           animationData={animationData}
-          style={{ width: 150, height: 150 }}
+          style={{ width: 150, height: 150, }}
           />
 
 
